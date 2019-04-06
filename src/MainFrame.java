@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
 
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
-        frame.setBounds(340,150,821,260);//坐标和长宽
+        frame.setBounds(340,150,750,320);//坐标和长宽
         frame.setVisible(true);//设置可见
     }
 }

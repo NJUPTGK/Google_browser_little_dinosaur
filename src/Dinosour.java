@@ -16,5 +16,7 @@ public class Dinosour {
         {
             e.printStackTrace();
         }
+        x = 50;
+        y = 200;
     }
 }
