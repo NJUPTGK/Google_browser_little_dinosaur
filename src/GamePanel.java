@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.xml.stream.FactoryConfigurationError;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,6 +12,8 @@ public class GamePanel extends JPanel {
     Graphics2D g2;//绘图工具，美工
     Dinosour golden;
     BufferedImage background;
+    boolean finish = false;//游戏结束
+    static final int FRESH = 20;//刷新时间,毫秒
     public GamePanel(){
         image = new BufferedImage(800,300,BufferedImage.TYPE_INT_BGR);
         g2 = image.createGraphics();
@@ -22,9 +25,12 @@ public class GamePanel extends JPanel {
         {
             e.printStackTrace();
         }
+        FreshThread t = new FreshThread(this);//刷新线程
+        t.start();
     }
     private void paintImage()//绘制图片
     {
+        golden.move();//让狗蛋移动
         g2.drawImage(background,0,0,this);
         g2.drawImage(golden.image,golden.x,golden.y,this);//
     }
@@ -33,5 +39,9 @@ public class GamePanel extends JPanel {
     public void paint(Graphics g) {
         paintImage();
         g.drawImage(image,0,0,this);//把主图片贴在面板上
+    }
+
+    public boolean isFinish() {
+        return finish;
     }
 }
