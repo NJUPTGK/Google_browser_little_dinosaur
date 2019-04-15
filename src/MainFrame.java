@@ -9,6 +9,7 @@ public class MainFrame extends JFrame {
         p = new GamePanel();
         Container c = getContentPane();//获取窗体的主容器
         c.add(p);//把游戏面板添加到主容器中
+        addKeyListener(p);//添加键盘事件监听
     }
 
     public static void main(String[] args) {

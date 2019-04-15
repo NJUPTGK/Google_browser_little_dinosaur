@@ -10,6 +10,10 @@ public class Dinosour {
     BufferedImage image1,image2;
     int stepTimer = 0;//计时器
     int fresh = GamePanel.FRESH;//刷新时间
+    boolean jumpState;//跳跃的状态
+    int jumpHeight = 100;//跳跃的高度
+    final int LOWEST_Y = 200;//跳跃的最低点
+    int jumpValue = 0;//跳跃的增变量(速度)
     public Dinosour()
     {
         try {
@@ -21,10 +25,22 @@ public class Dinosour {
             e.printStackTrace();
         }
         x = 50;
-        y = 200;
+        y = LOWEST_Y;
     }
     public void move(){
         step();//踏步
+        if(jumpState){//当起跳的时候
+            if(y>=LOWEST_Y){//如果站在地上
+                jumpValue=-10;
+            }
+            if(y<=LOWEST_Y-jumpHeight){
+                jumpValue = 10;
+            }
+            y+=jumpValue;
+            if(y>=LOWEST_Y){
+                jumpState = false;
+            }
+        }
     }
     void step()
     {
@@ -38,6 +54,9 @@ public class Dinosour {
                 image = image2;
                 break;
         }
-        stepTimer += fresh;
+        stepTimer += fresh;//计时器递增
+    }
+    public void jump(){//跳跃
+        jumpState = true;
     }
 }

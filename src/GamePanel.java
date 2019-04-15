@@ -2,15 +2,17 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.xml.stream.FactoryConfigurationError;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 //面板
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements KeyListener{
     BufferedImage image;//主图片
     Graphics2D g2;//绘图工具，美工
-    Dinosour golden;
+    Dinosour golden;//狗蛋
     BufferedImage background;
     boolean finish = false;//游戏结束
     static final int FRESH = 20;//刷新时间,毫秒
@@ -43,5 +45,23 @@ public class GamePanel extends JPanel {
 
     public boolean isFinish() {
         return finish;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {//按键的类型
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {//按键按下
+        int code = e.getKeyCode();//获取按下的键盘编码
+        if(code==KeyEvent.VK_SPACE){
+            golden.jump();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {//按键抬起
+
     }
 }
