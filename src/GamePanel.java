@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 //面板
 public class GamePanel extends JPanel implements KeyListener{
@@ -14,6 +16,9 @@ public class GamePanel extends JPanel implements KeyListener{
     Graphics2D g2;//绘图工具，美工
     Dinosour golden;//恐龙
     BackgroundImage  background;//背景对象
+
+    ArrayList<Obstacle> list = new ArrayList<Obstacle>();//集合
+    int addObstacleTimer = 0;
     boolean finish = false;//游戏结束
     static final int FRESH = 20;//刷新时间,毫秒
     public GamePanel(){
@@ -21,7 +26,7 @@ public class GamePanel extends JPanel implements KeyListener{
         g2 = image.createGraphics();
         golden = new Dinosour();
         background = new BackgroundImage();
-
+        list.add(new Obstacle());
         FreshThread t = new FreshThread(this);//刷新线程
         t.start();
     }
@@ -29,8 +34,24 @@ public class GamePanel extends JPanel implements KeyListener{
     {
         golden.move();//让恐龙移动
         background.roll();//背景滚动
+
         g2.drawImage(background.image,0,0,this);
         g2.drawImage(golden.image,golden.x,golden.y,this);//绘制恐龙
+        if(addObstacleTimer >= 1300){
+            Random r = new Random();
+            int a = r.nextInt(100);
+            if(a>40){
+                list.add(new Obstacle());
+            }
+            addObstacleTimer = 0;
+        }
+        for(int i=0;i<list.size();i++) {
+            Obstacle o = list.get(i);
+            o.move();
+            g2.drawImage(o.image,o.x,o.y,this);//绘制障碍
+        }
+        addObstacleTimer+=FRESH;//计时器计时
+
     }
 
     @Override
