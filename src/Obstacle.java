@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,5 +37,16 @@ public class Obstacle {
     }
     public void move(){
         x-=speed;
+    }
+    public Rectangle getBound()
+    {
+        if(image == cactus2||image == cactus1||image == cactus3)
+        {
+            return new Rectangle(x+5,y+5,image.getWidth()-8,image.getHeight()-5);
+        }
+        else
+        {
+            return new Rectangle(x,y,image.getWidth(),image.getHeight());
+        }
     }
 }

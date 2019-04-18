@@ -59,4 +59,10 @@ public class Dinosour {
     public void jump(){//跳跃
         jumpState = true;
     }
+    public Rectangle getHeadBounds(){
+        return new Rectangle(x+19,y+1,21,11);
+    }
+    public Rectangle getfeedBounds(){
+        return new Rectangle(x+11,y+34,12,10);
+    }
 }

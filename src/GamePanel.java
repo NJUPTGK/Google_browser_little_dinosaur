@@ -36,6 +36,9 @@ public class GamePanel extends JPanel implements KeyListener{
         background.roll();//背景滚动
 
         g2.drawImage(background.image,0,0,this);
+       // Rectangle r1 = golden.getfeedBounds();
+        //g2.setColor(Color.BLACK);
+        //g2.fillRect(r1.x,r1.y,r1.width,r1.height);
         g2.drawImage(golden.image,golden.x,golden.y,this);//绘制恐龙
         if(addObstacleTimer >= 1300){
             Random r = new Random();
@@ -48,10 +51,19 @@ public class GamePanel extends JPanel implements KeyListener{
         for(int i=0;i<list.size();i++) {
             Obstacle o = list.get(i);
             o.move();
+            //r1 = o.getBound();
+            //g2.fillRect(r1.x,r1.y,r1.width,r1.height);
             g2.drawImage(o.image,o.x,o.y,this);//绘制障碍
+            if(o.getBound().intersects(golden.getHeadBounds())||o.getBound().intersects(golden.getfeedBounds())){
+                gameOver();
+            }
         }
         addObstacleTimer+=FRESH;//计时器计时
 
+    }
+    public void gameOver()
+    {
+        finish = true;
     }
 
     @Override

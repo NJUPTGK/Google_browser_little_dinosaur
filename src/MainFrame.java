@@ -17,4 +17,8 @@ public class MainFrame extends JFrame {
         frame.setBounds(340,150,750,320);//坐标和长宽
         frame.setVisible(true);//设置可见
     }
+    public void restart(){
+
+    }
+
 }

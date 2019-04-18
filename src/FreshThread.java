@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class FreshThread extends Thread {
     GamePanel p;
     public FreshThread(GamePanel p)
@@ -17,6 +19,8 @@ public class FreshThread extends Thread {
             }
 
         }
+        //弹出通知
+        JOptionPane.showMessageDialog(null,"游戏结束");
 
     }
 }
