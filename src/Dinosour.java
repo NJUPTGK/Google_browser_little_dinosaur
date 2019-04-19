@@ -11,7 +11,7 @@ public class Dinosour {
     int stepTimer = 0;//计时器
     int fresh = GamePanel.FRESH;//刷新时间
     boolean jumpState;//跳跃的状态
-    int jumpHeight = 100;//跳跃的高度
+    int jumpHeight = 130;//跳跃的高度
     final int LOWEST_Y = 200;//跳跃的最低点
     int jumpValue = 0;//跳跃的增变量(速度)
     public Dinosour()

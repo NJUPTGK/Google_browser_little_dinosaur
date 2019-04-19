@@ -18,7 +18,12 @@ public class MainFrame extends JFrame {
         frame.setVisible(true);//设置可见
     }
     public void restart(){
-
+        Container c = getContentPane();
+        c.removeAll();//删除所有组件
+        GamePanel np = new GamePanel();
+        c.add(np);
+        addKeyListener(np);
+        c.validate();//重新验证容器组件
     }
 
 }

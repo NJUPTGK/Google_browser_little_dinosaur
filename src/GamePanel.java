@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,7 +17,8 @@ public class GamePanel extends JPanel implements KeyListener{
     Graphics2D g2;//绘图工具，美工
     Dinosour golden;//恐龙
     BackgroundImage  background;//背景对象
-
+    int score = 0;//得分
+    int addScoreTimer = 0;//得分计时器
     ArrayList<Obstacle> list = new ArrayList<Obstacle>();//集合
     int addObstacleTimer = 0;
     boolean finish = false;//游戏结束
@@ -58,7 +60,15 @@ public class GamePanel extends JPanel implements KeyListener{
                 gameOver();
             }
         }
+        if(addScoreTimer>=500){
+            score+=10;
+            addScoreTimer = 0;
+        }
+        g2.setColor(Color.BLACK);
+        g2.setFont(new Font("黑体",Font.BOLD,24));
+        g2.drawString(String.format("%05d",score),670,20);//绘制分数
         addObstacleTimer+=FRESH;//计时器计时
+        addScoreTimer += FRESH;
 
     }
     public void gameOver()
